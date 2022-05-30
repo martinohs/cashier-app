@@ -7,6 +7,6 @@ export interface User {
     role: string;
     password: string;
     enployeeCode: number;
-
+    active: boolean;
     
 }

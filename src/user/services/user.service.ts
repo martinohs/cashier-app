@@ -1,4 +1,5 @@
 import { ObjectId } from "bson";
+import { User } from "../dtos/user.interface";
 
 import { UserRepository } from "../repository/user.repository";
 
@@ -13,22 +14,42 @@ export class UserService {
         if (!this.instance){
             this.instance = new UserService();
         }
-
         return this.instance;
     }
 
-        public getUsers() {
-
+    public getUsers() {
         return this.userRepository.getUsers();
-      }
+    }
 
     public async getUser(id: ObjectId){
-
         const user = await this.userRepository.getUser(id);
 
         if (!user){
             console.log('User was not found');
         }
+
+        return user;
+    }
+
+    public async addUser(user:User) {
+
+        const newUser = await this.userRepository.addUser(user);
+
+        if (!user) {
+            console.log('Error cant create new user');
+        }
+
+        return newUser;
+    }
+
+    public async disableUser(id: ObjectId){
+        const user = await this.userRepository.disableUser(id);
+
+        return user;
+    }
+
+    public async enableUser(id: ObjectId){
+        const user = await this.userRepository.enableUser(id);
 
         return user;
     }

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { USER_MODEL_NAME } from '../constants';
+import { USER_MODEL_NAME, USER_ROLES } from '../constants';
 import { User } from '../dtos/user.interface';
 
 const userSchema = new Schema<User>({
@@ -10,7 +10,7 @@ const userSchema = new Schema<User>({
     },
     lastName: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
@@ -24,7 +24,8 @@ const userSchema = new Schema<User>({
     }, 
     role:{
         type: String,
-        required: true
+        required: true,
+        enum: USER_ROLES
     },
     password: {
         type: String,
@@ -34,6 +35,11 @@ const userSchema = new Schema<User>({
         type: Number,
         required: true,
         unique: true
+    },
+    active:{
+        type: Boolean,
+        required: true,
+        default: true
     }
 
 
