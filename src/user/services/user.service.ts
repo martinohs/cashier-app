@@ -1,5 +1,7 @@
 import { ObjectId } from "bson";
+import { json } from "stream/consumers";
 import { User } from "../dtos/user.interface";
+import { IdNotFoundException } from "../exceptions/idNotFound.exception";
 
 import { UserRepository } from "../repository/user.repository";
 
@@ -9,6 +11,13 @@ export class UserService {
     private userRepository = UserRepository.getInstance();
 
     private constructor() {}
+    
+    private ifUserNotFound = (user: any, id?: ObjectId) => {
+        if (!user){
+            console.log('User was not found');
+            throw new IdNotFoundException(`id ${id} was not found in DB`);
+        }
+    }
 
     public static getInstance(): UserService{
         if (!this.instance){
@@ -23,10 +32,8 @@ export class UserService {
 
     public async getUser(id: ObjectId){
         const user = await this.userRepository.getUser(id);
-
-        if (!user){
-            console.log('User was not found');
-        }
+        
+        this.ifUserNotFound(user,id);
 
         return user;
     }
@@ -34,7 +41,6 @@ export class UserService {
     public async addUser(user:User) {
 
         const newUser = await this.userRepository.addUser(user);
-
         if (!user) {
             console.log('Error cant create new user');
         }
@@ -44,13 +50,17 @@ export class UserService {
 
     public async disableUser(id: ObjectId){
         const user = await this.userRepository.disableUser(id);
-
+       
+        this.ifUserNotFound(user,id);
+        
         return user;
     }
 
     public async enableUser(id: ObjectId){
         const user = await this.userRepository.enableUser(id);
-
+        
+        this.ifUserNotFound(user,id);
+        
         return user;
     }
 

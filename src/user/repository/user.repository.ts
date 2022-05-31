@@ -1,4 +1,6 @@
 import { ObjectId } from "bson";
+import { error } from "console";
+import { json } from "stream/consumers";
 import { User } from "../dtos/user.interface";
 import { UserDocument, UserModel } from "../schemas/user.schema";
 
@@ -25,7 +27,7 @@ export class UserRepository {
       }
 
     public getUser(id: ObjectId){
-        console.log(`Searching user with id ${id}`);
+        console.log(`Searching user with id ${id}`)
         return UserModel.findById(id);
     }
 

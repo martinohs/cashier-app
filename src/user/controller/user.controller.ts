@@ -70,7 +70,7 @@ userRouter.put('/disable/:id',
         try {
             
             const { id } = req.params;
-            const userId = new ObjectId(id);
+            const userId = new ObjectId(id); 
             const user = await userService.disableUser(userId);
 
             res.json({user});
