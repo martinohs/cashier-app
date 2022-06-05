@@ -31,7 +31,7 @@ const userSchema = new Schema<User>({
         type: String,
         required: true,
     },
-    enployeeCode:{
+    employeeCode:{
         type: Number,
         required: true,
         unique: true

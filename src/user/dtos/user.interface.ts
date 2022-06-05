@@ -6,7 +6,7 @@ export interface User {
     cellphone: number;
     role: string;
     password: string;
-    enployeeCode: number;
+    employeeCode: number;
     active: boolean;
     
 }

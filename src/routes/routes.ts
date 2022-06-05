@@ -1,7 +1,10 @@
 import { Application } from 'express';
+import { brandRouter } from '../brand/controller/brand.controller';
 import { userRouter } from '../user/controller/user.controller';
 
 export const setupRoutes = (app:Application) => {
+    //* ejemplo
+    //*    app.use('/pathPrincipal, funcion del controller)
     
     //Testear que este up, despues borrar
     app.get('/ping', (_req, res) => {
@@ -10,6 +13,5 @@ export const setupRoutes = (app:Application) => {
     });
 
     app.use('/users', userRouter);
-    //* ejemplo
-    //*    app.use('/pathPrincipal, funcion del controller)
+    app.use('/brands',brandRouter);
 }

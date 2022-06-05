@@ -28,7 +28,7 @@
 
 //     @Expose()
 //     @isNumber()
-//     enployeeCode: number;
+//     employeeCode: number;
 
 // }
 
